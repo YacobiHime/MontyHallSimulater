@@ -43,7 +43,7 @@ def monty_hall_simulater():
 
                     num_to_open = num_doors - 2 # モンティが開ける外れのドアの数
 
-                    # もしモンティが開ける外れのドアの数が、モンティが開けられるドアの数よりも大きい場合は、モンティは全ての外れのドアを開ける
+                    # もしモンティが開ける外れのドアの数が、モンティが開けられるドアの数よりも大きいなら、モンティは全ての外れのドアを開ける
                     if num_to_open > len(monty_can_open):
                         num_to_open = len(monty_can_open)
 
