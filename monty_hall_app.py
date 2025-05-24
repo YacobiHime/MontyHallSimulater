@@ -1,7 +1,13 @@
 import random
 import matplotlib.pyplot as plt # matplotlibをインポート
-import japanize_matplotlib  # matplotlibで日本語フォントを使用するためのモジュール
 
+font_path = "fonts/NotoSerifJP-Regular.ttf"
+
+plt.rcParams['font.family'] = 'Noto Serif JP' # フォント設定
+plt.rcParams["font.sans-serif"] = "Noto Serif JP" # サンセリフフォント設定
+plt.rcParams['axes.unicode_minus'] = False # マイナス記号の表示設定
+
+# モンティホール問題のシミュレーションを行う関数
 def monty_hall_simulater():
     try:
         num_doors_str = input("ドアの数を入力してください。（3以上の数を入力）>>>")
@@ -19,26 +25,25 @@ def monty_hall_simulater():
                 no_change_wins = 0
                 change_wins = 0
                 
-                for i in range(num_trials):
-                    doors = list(range(num_doors))
-                    hit_door = random.choice(doors)
-                    initial_choice = random.choice(doors)
+                for i in range(num_trials): # 試行回数分ループ
+                    doors = list(range(num_doors)) # ドアのリストを作成
+                    hit_door = random.choice(doors) # 正解のドアをランダムに選択
+                    initial_choice = random.choice(doors) # 最初に選択するドアをランダムに選択
                     
                     # ドアを変更しない場合
-                    final_choice_no_change = initial_choice
+                    final_choice_no_change = initial_choice # 最初に選んだドアをそのまま選択
                     if final_choice_no_change == hit_door:
-                        no_change_wins += 1
+                        no_change_wins += 1 # もし最後に選択していたドアが当たりだった場合変更せずに正解した回数を1追加
                     
                     # ドアを変更する場合
                     monty_can_open = [] # モンティが開けられる外れのドアのリスト
                     for d in doors:
                         if d != initial_choice and d != hit_door:
                             monty_can_open.append(d)
-                    
-                    # モンティが公開するドアの数は、ドアの総数から最初に選んだドアと正解のドアを除いた数
-                    num_to_open = num_doors - 2
-                    
-                    # モンティが開けられるドアの数が不足している場合、開けられるだけ開ける
+
+                    num_to_open = num_doors - 2 # モンティが開ける外れのドアの数
+
+                    # もしモンティが開ける外れのドアの数が、モンティが開けられるドアの数よりも大きい場合は、モンティは全ての外れのドアを開ける
                     if num_to_open > len(monty_can_open):
                         num_to_open = len(monty_can_open)
 
