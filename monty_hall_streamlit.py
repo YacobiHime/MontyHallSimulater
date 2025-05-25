@@ -1,16 +1,17 @@
 import random
 import matplotlib.pyplot as plt
 import streamlit as st
-import japanize_matplotlib
+import matplotlib.font_manager as fm
 
 # Streamlitのページ設定
 st.set_page_config(layout="wide") # ページ全体を使う設定
 st.title("モンティホール問題シミュレーション") # アプリのタイトル
 
 # フォント設定 (Streamlitではパスを指定する必要が無いらしいが、一応残しておく)
-# font_path = "fonts/NotoSerifJP-Regular.ttf" # アプリ実行環境にフォントファイルを置く
-# plt.rcParams['font.family'] = 'Noto Serif JP'
-# plt.rcParams["font.sans-serif"] = "Noto Serif JP"
+font_path = "fonts/NotoSerifJP-Regular.ttf" # アプリ実行環境にフォントファイルを置く
+font_prop = fm.FontProperties(fname=font_path)
+fm.fontManager.addfont(font_path) # フォントファイルをmatplotlibに登録
+plt.rcParams['font.family'] = font_prop.get_name()
 plt.rcParams['axes.unicode_minus'] = False
 
 # モンティホール問題のシミュレーションを行う関数
