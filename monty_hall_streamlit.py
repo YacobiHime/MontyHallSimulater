@@ -1,15 +1,16 @@
 import random
 import matplotlib.pyplot as plt
 import streamlit as st
+import japanize_matplotlib
 
 # Streamlitのページ設定
 st.set_page_config(layout="wide") # ページ全体を使う設定
 st.title("モンティホール問題シミュレーション") # アプリのタイトル
 
 # フォント設定 (Streamlitではパスを指定する必要が無いらしいが、一応残しておく)
-font_path = "fonts/NotoSerifJP-Regular.ttf" # アプリ実行環境にフォントファイルを置く必要がある
-plt.rcParams['font.family'] = 'Noto Serif JP'
-plt.rcParams["font.sans-serif"] = "Noto Serif JP"
+# font_path = "fonts/NotoSerifJP-Regular.ttf" # アプリ実行環境にフォントファイルを置く
+# plt.rcParams['font.family'] = 'Noto Serif JP'
+# plt.rcParams["font.sans-serif"] = "Noto Serif JP"
 plt.rcParams['axes.unicode_minus'] = False
 
 # モンティホール問題のシミュレーションを行う関数
@@ -58,7 +59,7 @@ def monty_hall_simulater_streamlit(num_doors, num_trials):
 
     return no_change_wins, change_wins # シミュレーション結果を返す
 
-# --- StreamlitのUI要素 ---
+# StreamlitのUI要素
 st.sidebar.header("シミュレーション設定")
 num_doors = st.sidebar.slider("ドアの数", min_value=3, max_value=100, value=3, step=1)
 num_trials = st.sidebar.number_input("試行回数", min_value=1, max_value=100000, value=1000, step=100)
