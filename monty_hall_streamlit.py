@@ -58,7 +58,7 @@ def monty_hall_simulater_streamlit(num_doors, num_trials):
             if final_choice_change == hit_door:
                 change_wins += 1 # もし最後に選択していたドアが当たりなら、変更して正解した回数を1追加
 
-    return no_change_wins, change_wins # ドアを変更しなかった場合と変更した場合の勝利数を返す
+    return no_change_wins, change_wins # ドアを変更しなかった場合と変更した場合の正解数を返す
 
 # Streamlitの設定
 st.sidebar.header("シミュレーション設定")
