@@ -7,9 +7,9 @@ st.set_page_config(layout="wide") # ページ全体を使う設定
 st.title("モンティホール問題シミュレーション") # アプリのタイトル
 
 # フォント設定 (Streamlitではパスを指定する必要が無いらしいが、一応残しておく)
-# font_path = "fonts/NotoSerifJP-Regular.ttf" # アプリ実行環境にフォントファイルを置く必要がある
-# plt.rcParams['font.family'] = 'Noto Serif JP'
-# plt.rcParams["font.sans-serif"] = "Noto Serif JP"
+font_path = "fonts/NotoSerifJP-Regular.ttf" # アプリ実行環境にフォントファイルを置く必要がある
+plt.rcParams['font.family'] = 'Noto Serif JP'
+plt.rcParams["font.sans-serif"] = "Noto Serif JP"
 plt.rcParams['axes.unicode_minus'] = False
 
 # モンティホール問題のシミュレーションを行う関数
