@@ -7,7 +7,7 @@ import matplotlib.font_manager as fm
 st.set_page_config(layout="wide") # ページ全体を使う設定
 st.title("モンティホール問題シミュレーション") # アプリのタイトル
 
-# フォント設定 (Streamlitではパスを指定する必要が無いらしいが、一応残しておく)
+# フォント設定
 font_path = "fonts/NotoSerifJP-Regular.ttf" # アプリ実行環境にフォントファイルを置く
 font_prop = fm.FontProperties(fname=font_path)
 fm.fontManager.addfont(font_path) # フォントファイルをmatplotlibに登録
@@ -40,7 +40,7 @@ def monty_hall_simulater_streamlit(num_doors, num_trials):
         if num_to_open > len(monty_can_open):
             num_to_open = len(monty_can_open)
 
-        # 外れのドアがない場合はエラーになるので、monty_opened_doorsを空リストにする
+        # 外れのドアがない場合はエラーになるため、monty_opened_doorsを空リストにする
         if monty_can_open:
             monty_opened_doors = random.sample(monty_can_open, min(num_to_open, len(monty_can_open)))
         else:
@@ -58,9 +58,9 @@ def monty_hall_simulater_streamlit(num_doors, num_trials):
             if final_choice_change == hit_door:
                 change_wins += 1 # もし最後に選択していたドアが当たりなら、変更して正解した回数を1追加
 
-    return no_change_wins, change_wins # シミュレーション結果を返す
+    return no_change_wins, change_wins # ドアを変更しなかった場合と変更した場合の勝利数を返す
 
-# StreamlitのUI要素
+# Streamlitの設定
 st.sidebar.header("シミュレーション設定")
 num_doors = st.sidebar.slider("ドアの数", min_value=3, max_value=100, value=3, step=1)
 num_trials = st.sidebar.number_input("試行回数", min_value=1, max_value=100000, value=1000, step=100)
@@ -71,12 +71,12 @@ if st.sidebar.button("シミュレーション実行"):
     elif num_trials <= 0:
         st.error("試行回数は正の整数である必要があります。")
     else:
-        with st.spinner("シミュレーション中..."): # 処理中にスピナーを表示
+        with st.spinner("シミュレーション中..."): # 処理中にロード中のスピナーを表示
             no_change_wins, change_wins = monty_hall_simulater_streamlit(num_doors, num_trials)
 
         st.subheader(f"シミュレーションの結果（ドアの数: {num_doors}、試行回数: {num_trials}回）:")
 
-        col1, col2 = st.columns(2) # 2つのカラムで表示
+        col1, col2 = st.columns(2) # 2つの列（カラム）で表示
 
         with col1:
             st.write("--- ドアを変更しなかった場合 ---")
@@ -88,7 +88,7 @@ if st.sidebar.button("シミュレーション実行"):
             st.write(f"正解した回数: **{change_wins}回**")
             st.write(f"正解した確率: **{change_wins / num_trials:.2%}**")
 
-        # --- グラフの作成 ---
+        # グラフの作成
         labels = ['変更しない', '変更する']
         wins = [no_change_wins, change_wins]
         win_probabilities = [no_change_wins / num_trials, change_wins / num_trials]
