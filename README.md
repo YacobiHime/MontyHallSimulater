@@ -41,5 +41,5 @@ https://montyhallsimulater-mgdjxcpzcwyqy2tgrdrn8v.streamlit.app/
 * モンティホール問題をシミュレートし、ドアを変更しない場合と変更した場合の勝敗を判定し、それぞれの勝数を返します。<br>
 * `monty_hall_app.py`と`monty_hall_streamlit.py`の2つがありますが、`monty_hall_app.py`はコンソール等で実行するための通常のPythonプログラムで、`monty_hall_streamlit.py`はstreamlitで実行するために変更を加えたPythonプログラムです。
 ### StreamlitのUI部分
-* `st.sidebar`を使用して入力設定（ドアの数、試行回数）をサイドバーに配置しています。
-* `st.pyplot(fig)`を使用してMatplotlibで作成したグラフをStreamlitアプリ内に表示しています。
+* `st.sidebar`を使用して入力設定（ドアの数、試行回数）をサイドバーに配置。
+* `st.pyplot(fig)`を使用してMatplotlibで作成したグラフをStreamlitアプリ内に表示。
