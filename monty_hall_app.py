@@ -16,8 +16,7 @@ def monty_hall_simulater():
         if num_doors < 3:
             print("ドアの数は3以上である必要があります。プログラムを終了します。")
         else:
-            num_trials_str = input("試行回数を入力してください。>>>")
-            num_trials = int(num_trials_str)
+            num_trials = int(input("試行回数を入力してください。>>>"))
             
             if num_trials <= 0:
                 print("試行回数は正の整数である必要があります。プログラムを終了します")
@@ -28,7 +27,7 @@ def monty_hall_simulater():
                 for i in range(num_trials): # 試行回数分ループ
                     doors = list(range(num_doors)) # ドアのリストを作成
                     hit_door = random.choice(doors) # 正解のドアをランダムに選択
-                    initial_choice = random.choice(doors) # 最初に選択するドアをランダムに選択
+                    initial_choice = random.choice(doors) # 挑戦者が最初に選択するドアをランダムに選択
                     
                     # ドアを変更しない場合
                     final_choice_no_change = initial_choice # 最初に選んだドアをそのまま選択
@@ -37,25 +36,27 @@ def monty_hall_simulater():
                     
                     # ドアを変更する場合
                     monty_can_open = [] # モンティが開けられる外れのドアのリスト
+                    # 最初に選択したドアと正解のドアを避けて、外れのドアリストを作成
                     for d in doors:
                         if d != initial_choice and d != hit_door:
                             monty_can_open.append(d)
 
-                    num_to_open = num_doors - 2 # モンティが開ける外れのドアの数
+                    num_to_open = num_doors - 2 # モンティが開けるべき外れのドアの数
 
-                    # もしモンティが開ける外れのドアの数が、モンティが開けられるドアの数よりも大きいなら、モンティは全ての外れのドアを開ける
+                    # 念の為、モンティが開けるドアの数がドアの数よりも大きい場合は、モンティが開けられるドアの数に設定
                     if num_to_open > len(monty_can_open):
                         num_to_open = len(monty_can_open)
-
+                    
+                    # モンティが開けられるドアと、開けるべきドアの2つから、モンティが実際に開けたドアのリストを作成
                     monty_opened_doors = random.sample(monty_can_open, num_to_open)
                     
+                    # 最初に選んだドアとモンティが開けたドアを除外して、選びなおせるドアのリストを作成
                     possible_final_choices = []
                     for d in doors:
                         if d != initial_choice and d not in monty_opened_doors:
                             possible_final_choices.append(d)
                             
-                    # ドアを変更する場合は、残ったドアから一つを選択する
-                    # 複数残る場合（ドアが4つ以上の場合）は、均等な確率で選択されると仮定
+                    # ドアを変更する場合は、選び直せるドアのリストから一つを選択する
                     final_choice_change = random.choice(possible_final_choices) 
                     
                     if final_choice_change == hit_door:

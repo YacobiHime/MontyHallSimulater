@@ -22,12 +22,12 @@ def monty_hall_simulater_streamlit(num_doors, num_trials):
     for i in range(num_trials): # 試行回数分ループ
         doors = list(range(num_doors)) # ドアのリストを作成
         hit_door = random.choice(doors) # 正解のドアをランダムに選択
-        initial_choice = random.choice(doors) # 最初に選択するドアをランダムに選択
+        initial_choice = random.choice(doors) # 挑戦者が最初に選択するドアをランダムに選択
 
         # ドアを変更しない場合
         final_choice_no_change = initial_choice # 最初に選んだドアをそのまま選択
         if final_choice_no_change == hit_door:
-            no_change_wins += 1 # もし最後に選択していたドアが当たりなら、変更せずに正解した回数を1追加
+            no_change_wins += 1 
 
         # ドアを変更する場合
         monty_can_open = [] # モンティが開けられる外れのドアのリスト
@@ -35,12 +35,12 @@ def monty_hall_simulater_streamlit(num_doors, num_trials):
             if d != initial_choice and d != hit_door:
                 monty_can_open.append(d)
 
-        # もしモンティが開ける外れのドアの数が、モンティが開けられるドアの数よりも大きいなら、モンティは全ての外れのドアを開ける
+        # 念の為、もしモンティが開けるべき外れのドアの数が、モンティが開けられるドアの数よりも大きいなら、モンティは全ての外れのドアを開ける
         num_to_open = num_doors - 2
         if num_to_open > len(monty_can_open):
             num_to_open = len(monty_can_open)
-
-        # 外れのドアがない場合はエラーになるため、monty_opened_doorsを空リストにする
+        
+        # モンティが実際に開けたドアのリストを作成
         if monty_can_open:
             monty_opened_doors = random.sample(monty_can_open, min(num_to_open, len(monty_can_open)))
         else:
@@ -51,8 +51,7 @@ def monty_hall_simulater_streamlit(num_doors, num_trials):
             if d != initial_choice and d not in monty_opened_doors:
                 possible_final_choices.append(d)
 
-        # ドアを変更する場合は、残ったドアから一つを選択する
-        # 残りのドアがない場合はスキップ（理論上、残りのドアは発生しないはず）
+        # ドアを変更する場合は、残ったドアから一つを選び直す
         if possible_final_choices:
             final_choice_change = random.choice(possible_final_choices)
             if final_choice_change == hit_door:
